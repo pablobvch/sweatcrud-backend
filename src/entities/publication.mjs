@@ -1,6 +1,6 @@
 // @flow
 
-import type { Author } from "./Author";
+import type {Author} from "./author";
 
 type Publication = {
   authors: Array<Author>,
