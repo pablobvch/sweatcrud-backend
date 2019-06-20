@@ -2,10 +2,10 @@
 
 import Router from "express";
 
-import type { $Request, $Response, $Router } from "express";
+import type {$Request, $Response, $Router} from "express";
 
-import { sendFrom as apiResultSendFrom } from "../../utils/apiResult";
-import { throwFrom as apiErrorThrowFrom } from "../../utils/apiError";
+import {sendFrom as apiResultSendFrom} from "../../utils/apiResult";
+import {throwFrom as apiErrorThrowFrom} from "../../utils/apiError";
 import * as apiErrorPayloads from "./apiErrorPayloads";
 import * as authorMapper from "../../../db/mappers/author/index";
 
@@ -20,7 +20,7 @@ authoresRouter.get("/", (request: $Request, response: $Response) =>
   )
 );
 
-const getUsing = (id, fields) => (fields ? { id, fields } : { id });
+const getUsing = (id, fields) => (fields ? {id, fields} : {id});
 
 authoresRouter.get("/:id", (request: $Request, response: $Response) =>
   apiResultSendFrom(

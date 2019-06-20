@@ -1,5 +1,5 @@
 // @flow
 
-const unknown = { code: 0, scope: "authors" };
+const unknown = {code: 0, scope: "authors"};
 
-export { unknown };
+export {unknown};
