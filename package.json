@@ -11,8 +11,7 @@
     "prestart": "yarn build",
     "start": "node --experimental-modules dist/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm-watch",
-    "deploy": "npx pm2 start && npx pm2-startup install && npx pm2 save"
+    "watch": "npm-watch"
   },
   "watch": {
     "build": "src/**/*.mjs"
