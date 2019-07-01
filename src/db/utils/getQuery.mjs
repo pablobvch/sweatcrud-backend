@@ -13,7 +13,7 @@ const getColumnField = (options, entityFields) => (query, field) =>
 const addFieldsToQueryUsing = (query, entityFields, options) =>
   options.fields.reduce(getColumnField(options, entityFields), query);
 
-const getQuery = (query, entityFields, options = {}) =>
+const getQuery = (query: any, entityFields: mixed, options: mixed = {}) =>
   addFieldsToQueryUsing(
     query,
     entityFields,

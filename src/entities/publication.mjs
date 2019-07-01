@@ -2,10 +2,12 @@
 
 import type {Author} from "./author";
 
-type Publication = {
-  authors: Array<Author>,
+type Publication = {|
   body: string,
   dateTime: Date,
-  id: number,
-  title: string
-};
+  id: Number,
+  title: String,
+  authorId: Number
+|};
+
+export type {Publication};

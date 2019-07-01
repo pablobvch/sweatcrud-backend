@@ -1,11 +1,11 @@
 // @flow
 
-type ApiErrorPayload = {| code: number, scope: string |};
+type ApiErrorPayload = {|code: number, scope: string|};
 
-type ApiError = Error & { payload: ApiErrorPayload };
+type ApiError = Error & {payload: ApiErrorPayload};
 
 const from = (payload: ApiErrorPayload) => (error: Error) =>
-  Object.assign(error, { payload });
+  Object.assign(error, {payload});
 
 const throwFrom = payload => error => {
   console.log("payload", payload);
@@ -13,6 +13,6 @@ const throwFrom = payload => error => {
   throw from(payload)(error);
 };
 
-export { throwFrom, from };
+export {throwFrom, from};
 
-export type { ApiError, ApiErrorPayload };
+export type {ApiError, ApiErrorPayload};

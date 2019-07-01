@@ -1,10 +1,13 @@
 // @flow
 
-type Author = {
+import type {Publication} from "./publication";
+
+type Author = {|
   dateOfBirth: Date,
   email: String,
   id: Number,
-  name: string
-};
+  name: String,
+  publications: Array<Publication>
+|};
 
-export type { Author };
+export type {Author};
