@@ -14,7 +14,7 @@ const getRowMapper = (options, publicationFields) => row =>
 const initializeQuery = (db, options) =>
   db(publicationTableName)
     .select()
-    .where(publicationIdField.getColumnAlias(options), "=", options.id);
+    .where(publicationIdField.getFullColumnName(options), "=", options.id);
 
 const get = (db: any, options: GetOptionsById) =>
   addFieldsToQuery(

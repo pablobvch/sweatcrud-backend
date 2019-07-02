@@ -13,24 +13,34 @@ import type {Publication} from "../../../../entities/publication";
 
 const defaultOptions = {};
 
-const toRow = (entity, row) => row;
+const toRow = (publication, row) => ({...row, publication});
 
 const getJoin = (query: any) =>
-  query.innerJoin(
+  /*console.log(
+    "authorIdField.getFullColumnName",
+    authorIdField.getFullColumnName({})
+  ),
+  console.log(
+    "publicationAuthorId.getFullColumnName",
+    publicationAuthorId.getFullColumnName({})
+  ),*/
+  query.leftJoin(
     publicationTableName,
     authorIdField.getFullColumnName({}),
     publicationAuthorId.getFullColumnName({})
   );
 
-const toGet = (query: any) => (
-  console.log("parametro entrada en toGet", query),
-  console.log("getJoin de query en toGet", getJoin(query).toString()),
-  addFieldsToQuery(authorFields, getJoin(query), defaultOptions)
-);
+const toGet = (query: any) =>
+  //console.log("parametro entrada en toGet", query),
+  //console.log("getJoin de query en toGet", getJoin(query).toString()),
+  addFieldsToQuery(publicationFields, getJoin(query), defaultOptions);
 
-const toEntity = (entity, rows) => ({
-  ...entity,
-  publications: getRowToEntity(publicationFields, rows, defaultOptions)
-});
+const toEntity = (entity, row) =>
+  //console.log("entity en toEntity", entity),
+  //console.log("row en toEntity", row),
+  ({
+    ...entity,
+    publication: getRowToEntity(publicationFields, row, defaultOptions)
+  });
 
 export {toEntity, toGet, toRow};

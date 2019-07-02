@@ -14,7 +14,7 @@ const getRowMapper = (options, authorFields) => row =>
 const initializeQuery = (db, options) =>
   db(authorTableName)
     .select()
-    .where(authorIdField.getColumnAlias(options), "=", options.id);
+    .where(authorIdField.getFullColumnName(options), "=", options.id);
 
 const get = (db: any, options: GetOptionsById) =>
   addFieldsToQuery(
