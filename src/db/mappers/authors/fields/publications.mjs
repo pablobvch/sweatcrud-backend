@@ -16,14 +16,6 @@ const defaultOptions = {};
 const toRow = (publication, row) => ({...row, publication});
 
 const getJoin = (query: any) =>
-  /*console.log(
-    "authorIdField.getFullColumnName",
-    authorIdField.getFullColumnName({})
-  ),
-  console.log(
-    "publicationAuthorId.getFullColumnName",
-    publicationAuthorId.getFullColumnName({})
-  ),*/
   query.leftJoin(
     publicationTableName,
     authorIdField.getFullColumnName({}),
@@ -31,16 +23,11 @@ const getJoin = (query: any) =>
   );
 
 const toGet = (query: any) =>
-  //console.log("parametro entrada en toGet", query),
-  //console.log("getJoin de query en toGet", getJoin(query).toString()),
   addFieldsToQuery(publicationFields, getJoin(query), defaultOptions);
 
-const toEntity = (entity, row) =>
-  //console.log("entity en toEntity", entity),
-  //console.log("row en toEntity", row),
-  ({
-    ...entity,
-    publication: getRowToEntity(publicationFields, row, defaultOptions)
-  });
+const toEntity = (entity, row) => ({
+  ...entity,
+  publications: getRowToEntity(publicationFields, row, defaultOptions)
+});
 
 export {toEntity, toGet, toRow};
