@@ -10,6 +10,13 @@
       "name": "Debug Services",
       "program": "${workspaceFolder}/dist/server/index.js",
       "runtimeArgs": ["--no-deprecation", "--throw-deprecation"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Services Dev",
+      "program": "${workspaceFolder}/build/server/index.mjs",
+      "runtimeArgs": ["--experimental-modules"]
     }
   ]
 }
