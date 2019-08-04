@@ -11,4 +11,6 @@ type GetOptionsById = {|
   fields: Array<$Keys<Publication>>
 |};
 
-export type {GetOptions, GetOptionsById};
+type CreateOptions = {|entity: Publication|};
+
+export type {CreateOptions, GetOptions, GetOptionsById};

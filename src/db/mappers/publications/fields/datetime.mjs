@@ -1,37 +1,27 @@
 // @flow
 
-import {name as publicationTableName} from "../publicationTable.mjs";
+import createStandardField from "../../../utils/createStandardField";
+import {default as setDatetimeAsStandarField} from "../../../utils/setToRowToStandardField";
+import {name as publicationTableName} from "../publicationTable";
 
-import type {GetOptions} from "../types.mjs";
 import type {Publication} from "../../../../entities/publication";
 
-const columnName = "datetime";
+const toRow = ({body}: Publication, row: mixed) => ({datetime, ...row});
 
 const defaultOptions = {
   tableAlias: publicationTableName
 };
 
-const columnAlias = "publicationDatetime";
+const columnName = "datetime";
 
-const getOptionsWithDefaults = options => ({...defaultOptions, ...options});
+const columnAlias = "datetimeAlias";
 
-const getTableAlias = options => getOptionsWithDefaults(options).tableAlias;
+const standarField = createStandardField(
+  columnAlias,
+  columnName,
+  defaultOptions
+);
 
-const getFullColumnName = options => `${getTableAlias(options)}.${columnName}`;
+const datetime = setDatetimeAsStandarField(standarField, toRow);
 
-const getFullColumnAlias = options =>
-  `${getTableAlias(options)}.${columnAlias}`;
-
-const getColumnMapping = options => ({
-  [getFullColumnAlias(options)]: getFullColumnName(options)
-});
-
-const toEntity = (entity: Publication, row, options = {}) => ({
-  ...entity,
-  datetime: row[getFullColumnAlias(options)]
-});
-
-const toGet = (query: any, options = {}) =>
-  query.column(getColumnMapping(options));
-
-export {getFullColumnName, toGet, toEntity};
+export default datetime;

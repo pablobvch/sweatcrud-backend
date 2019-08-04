@@ -1,32 +1,32 @@
 // @flow
+
+import type {$Request, $Response} from "express";
+
+import authorIdField from "./fields/id";
+import getFieldsNamesButId from "../../utils/getFieldsNamesButId";
+import getEntityToRow from "../../utils/getEntityToRow";
 import {name as authorTableName} from "./authorTable";
 import * as publication from "../publications/index";
 import * as authorFields from "./fields/index";
-import getRow from "../../utils/getRow";
 
 import type {CreateOptions} from "./types.mjs";
 
-const addUser = (row, userId) => ({...row, Iuser: userId});
+const onAuthorCreated = author => author;
 
-const onAuthorCreated = (author, id) => ({
-  ...author,
-  id
-});
-
-const fieldNamesButId = Object.keys(authorFields).filter(
-  fieldName => fieldName != authorFields.id.name
-);
+const fieldsNamesButId = getFieldsNamesButId(authorFields, authorIdField);
 
 const getInsertQuery = (db, author) =>
   db
-    .insert(getRow(author, authorFields, fieldNamesButId))
-    .into(authorTableName);
+    .insert(getEntityToRow(author, authorFields, fieldsNamesButId))
+    .into(authorTableName)
+    .returning("*");
 
 const createUsing = (db, author) => trx =>
   getInsertQuery(db, author)
     .transacting(trx)
-    .then(onAuthorCreated(author, ids[0]));
+    .then(onAuthorCreated);
 
-const create = (db, {body: author}) => db.transaction(createUsing(db, author));
+const create = (db: any, {body: author}: $Request) =>
+  db.transaction(createUsing(db, author));
 
 export default create;

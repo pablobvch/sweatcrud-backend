@@ -7,17 +7,21 @@ const getOptionsWithDefaults = (options, entityFields) => ({
   ...options
 });
 
-const getColumnField = (options, entityFields) => (query, field) =>
+const getColumnField = (entityFields, options) => (query, field) =>
   entityFields[field].toGet(query, options);
 
-const addFieldsToQueryUsing = (query, entityFields, options) =>
-  options.fields.reduce(getColumnField(options, entityFields), query);
+const addFieldsToQueryUsing = (entityFields, options, query) =>
+  options.fields.reduce(getColumnField(entityFields, options), query);
 
-const getQuery = (query: any, entityFields: mixed, options: mixed = {}) =>
+const getQuery = (
+  entityFields: Array<$Keys<mixed>>,
+  options: mixed = {},
+  query: any
+) =>
   addFieldsToQueryUsing(
-    query,
     entityFields,
-    getOptionsWithDefaults(options, entityFields)
+    getOptionsWithDefaults(options, entityFields),
+    query
   );
 
 export default getQuery;

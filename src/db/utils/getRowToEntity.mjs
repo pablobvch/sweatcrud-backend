@@ -13,7 +13,7 @@ const getFieldToEntity = (entityFields, row, options) => (entity, field) =>
 const getRowToEntityUsing = (entityFields, row, options) =>
   options.fields.reduce(getFieldToEntity(entityFields, row, options), {});
 
-const getRowToEntity = (entityFields, row, options) =>
+const getRowToEntity = (entityFields: any, row: mixed, options: mixed) =>
   getRowToEntityUsing(
     entityFields,
     row,

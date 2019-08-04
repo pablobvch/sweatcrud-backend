@@ -2,7 +2,7 @@
 
 import {name as authorTableName} from "./authorTable.mjs";
 import * as authorFields from "./fields/index";
-import * as authorIdField from "./fields/id.mjs";
+import authorIdField from "./fields/id.mjs";
 import addFieldsToQuery from "../../utils/addFieldsToQuery";
 import getRowToEntity from "../../utils/getRowToEntity";
 

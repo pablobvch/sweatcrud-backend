@@ -1,6 +1,9 @@
 // @flow
 
-import get from "./get.mjs";
-import getAll from "./getAll.mjs";
+import create from "./create";
+import get from "./get";
+import getAll from "./getAll";
+import remove from "./remove";
+import update from "./update";
 
-export {get, getAll};
+export {create, get, getAll, remove, update};

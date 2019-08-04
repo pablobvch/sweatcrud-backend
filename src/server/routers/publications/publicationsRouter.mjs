@@ -1,5 +1,4 @@
 // @flow
-// @flow
 
 import Router from "express";
 
@@ -28,6 +27,47 @@ publicationsRouter.get("/:id", (request: $Request, response: $Response) =>
     response,
     publicationMapper
       .get(response.locals.db, getUsing(request.params.id, request.body.fields))
+      .catch(apiErrorThrowFrom(apiErrorPayloads.unknown))
+  )
+);
+
+publicationsRouter.get(
+  "/author/:id",
+  (request: $Request, response: $Response) =>
+    apiResultSendFrom(
+      response,
+      publicationMapper
+        .getByAuthorId(
+          response.locals.db,
+          getUsing(request.params.id, request.body.fields)
+        )
+        .catch(apiErrorThrowFrom(apiErrorPayloads.unknown))
+    )
+);
+
+publicationsRouter.post("/", (request: $Request, response: $Response) =>
+  apiResultSendFrom(
+    response,
+    publicationMapper
+      .create(response.locals.db, request)
+      .catch(apiErrorThrowFrom(apiErrorPayloads.unknown))
+  )
+);
+
+publicationsRouter.put("/", (request: $Request, response: $Response) =>
+  apiResultSendFrom(
+    response,
+    publicationMapper
+      .update(response.locals.db, request)
+      .catch(apiErrorThrowFrom(apiErrorPayloads.unknown))
+  )
+);
+
+publicationsRouter.delete("/:id", (request: $Request, response: $Response) =>
+  apiResultSendFrom(
+    response,
+    publicationMapper
+      .remove(response.locals.db, parseInt(request.params.id))
       .catch(apiErrorThrowFrom(apiErrorPayloads.unknown))
   )
 );

@@ -1,7 +1,9 @@
 // @flow
 
-const getRowReducer = (entity, entityFields) => (row, fieldName) =>
-  entityFields[fieldName].toRow(entity, row);
+const getRowReducer = (entity, entityFields) => (row, fieldName) => (
+  console.log("fieldName", fieldName),
+  entityFields[fieldName].toRow(entity, row)
+);
 
 const allFieldsNames = entityFields => Object.keys(entityFields);
 

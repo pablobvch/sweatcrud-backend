@@ -1,37 +1,27 @@
 // @flow
 
-import {name as authorTableName} from "../authorTable.mjs";
+import createStandardField from "../../../utils/createStandardField";
+import {default as setNameAsStandarField} from "../../../utils/setToRowToStandardField";
+import {name as authorTableName} from "../authorTable";
 
-import type {GetOptions} from "../types.mjs";
 import type {Author} from "../../../../entities/author";
 
-const columnName = "name";
+const toRow = ({name}: Author, row: mixed) => ({name, ...row});
 
 const defaultOptions = {
   tableAlias: authorTableName
 };
 
-const columnAlias = "authorName";
+const columnName = "name";
 
-const getOptionsWithDefaults = options => ({...defaultOptions, ...options});
+const columnAlias = "nameAlias";
 
-const getTableAlias = options => getOptionsWithDefaults(options).tableAlias;
+const standarField = createStandardField(
+  columnAlias,
+  columnName,
+  defaultOptions
+);
 
-const getFullColumnName = options => `${getTableAlias(options)}.${columnName}`;
+const name = setNameAsStandarField(standarField, toRow);
 
-const getFullColumnAlias = options =>
-  `${getTableAlias(options)}.${columnAlias}`;
-
-const getColumnMapping = options => ({
-  [getFullColumnAlias(options)]: getFullColumnName(options)
-});
-
-const toEntity = (entity: Author, row, options = {}) => ({
-  ...entity,
-  name: row[getFullColumnAlias(options)]
-});
-
-const toGet = (query: any, options = {}) =>
-  query.column(getColumnMapping(options));
-
-export {getFullColumnName, toGet, toEntity};
+export default name;

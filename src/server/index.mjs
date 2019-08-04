@@ -2,6 +2,9 @@
 
 import bodyParser from "body-parser";
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+
 import type {$Application} from "express";
 
 import authorsRouter from "./routers/authors/authorsRouter";

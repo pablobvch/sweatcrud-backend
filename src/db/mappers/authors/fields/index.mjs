@@ -1,9 +1,8 @@
 // @flow
 
-import * as dateOfBirth from "./dateOfBirth";
-import * as email from "./email";
-import * as id from "./id";
-import * as name from "./name";
-import * as publications from "./publications";
+import dateOfBirth from "./dateOfBirth";
+import email from "./email";
+import id from "./id";
+import name from "./name";
 
-export {dateOfBirth, email, id, name, publications};
+export {dateOfBirth, email, id, name};

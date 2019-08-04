@@ -1,4 +1,6 @@
 // @flow
+import dotenv from "dotenv";
+dotenv.config();
 
 export default {
   user: process.env.DATABASE_USERNAME,
